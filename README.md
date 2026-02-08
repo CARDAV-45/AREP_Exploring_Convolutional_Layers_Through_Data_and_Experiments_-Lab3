@@ -65,9 +65,9 @@ jupyter notebook Convolutional_Layers_Through_Data_and_Experiments.ipynb
 **Fuente**: [Pokémon Images and Types - Kaggle](https://www.kaggle.com/datasets/vishalsubbiah/pokemon-images-and-types)
 
 **Características del Dataset**:
-- **Total de Pokémon**: 150 muestras (150 generación original)
+- **Total de Pokémon**: ~626 muestras con imagen disponible
 - **Distribución de clases**: 18 tipos diferentes (Water, Normal, Grass, Flying, etc.)
-- **Formato de imágenes**: PNG, resolución variable, 3 canales RGB
+- **Formato de imágenes**: PNG, resolución variable, RGBA (convertidas a RGB)
 - **Metadatos disponibles**: Nombre, Tipo 1, Tipo 2, HP, Ataque, Defensa, Sp.Atk, Sp.Def, Velocidad
 
 **Características principales de los Pokémon**:
@@ -79,9 +79,10 @@ jupyter notebook Convolutional_Layers_Through_Data_and_Experiments.ipynb
 - **Speed**: Velocidad (rango 5-145)
 
 **Preprocesamiento**:
-- Redimensionamiento de imágenes a 64×64 píxeles (normalización de entrada)
-- Conversión a escala de grises o normalización RGB (0-1)
-- División estratificada 70/30 o 80/20 (entrenamiento/validación)
+- Conversión RGBA → RGB
+- Normalización RGB (0-1)
+- Redimensionamiento a 120×120 si la imagen original difiere
+- División estratificada Train/Val/Test
 
 ---
 
@@ -132,6 +133,18 @@ Se compararon múltiples arquitecturas CNN para clasificación de tipos de Poké
 | CNN Simple | 1 | ~50K | 0.82 | 0.75 |
 | CNN Medium | 2 | ~150K | 0.89 | 0.82 |
 | CNN Profunda | 3 | ~300K | 0.94 | 0.85 |
+
+**Diagrama CNN principal**:
+
+```
+Input 120x120x3
+  -> Conv(32, 3x3) + ReLU + MaxPool 2x2   => 60x60x32
+  -> Conv(64, 3x3) + ReLU + MaxPool 2x2   => 30x30x64
+  -> Conv(128, 3x3) + ReLU + MaxPool 2x2  => 15x15x128
+  -> Flatten (28,800)
+  -> Dense(256) + ReLU + Dropout(0.5)
+  -> Dense(18 clases)
+```
 
 ---
 
@@ -196,6 +209,21 @@ Se visualizaron los filtros aprendidos y los mapas de activación para entender 
 - **Mapas de activación**: Muestran qué regiones de la imagen son más relevantes para la predicción
 - **Análisis de confusión**: Algunos tipos (Flying, Normal) se confunden frecuentemente
 
+<p align="center">
+  <img src="Capturas/Comparacion/output4.png" alt="Filtros Conv1">
+</p>
+*Figura 8: Filtros aprendidos en la primera capa convolucional* 
+
+<p align="center">
+  <img src="Capturas/Comparacion/output5.png" alt="Feature maps Conv1">
+</p>
+*Figura 9: Mapas de activación de la primera capa* 
+
+<p align="center">
+  <img src="Capturas/Comparacion/output6.png" alt="Feature maps Conv2">
+</p>
+*Figura 10: Mapas de activación de la segunda capa* 
+
 ---
 
 ### 6. **Deployment en AWS SageMaker**
@@ -215,22 +243,22 @@ Se implementó el proceso de deployment del modelo CNN en AWS SageMaker para inf
 <p align="center">
   <img src="Capturas/Deployment/output3.png" alt="Creación de Bucket S3">
 </p>
-*Figura 8: Bucket S3 creado exitosamente para almacenar el modelo*
+*Figura 11: Bucket S3 creado exitosamente para almacenar el modelo*
 
 <p align="center">
   <img src="Capturas/Deployment/output4.png" alt="Upload del Modelo a S3">
 </p>
-*Figura 9: Modelo empaquetado (model.tar.gz) subido a S3*
+*Figura 12: Modelo empaquetado (model.tar.gz) subido a S3*
 
 <p align="center">
   <img src="Capturas/Deployment/output5.png" alt="Creación del Modelo en SageMaker">
 </p>
-*Figura 10: Modelo registrado exitosamente en AWS SageMaker*
+*Figura 13: Modelo registrado exitosamente en AWS SageMaker*
 
 <p align="center">
   <img src="Capturas/Deployment/output6.png" alt="Error de Permisos IAM">
 </p>
-*Figura 11: Restricción de permisos IAM en ambiente educativo (no permite crear endpoint)*
+*Figura 14: Restricción de permisos IAM en ambiente educativo (no permite crear endpoint)*
 
 #### Configuración de SageMaker:
 
