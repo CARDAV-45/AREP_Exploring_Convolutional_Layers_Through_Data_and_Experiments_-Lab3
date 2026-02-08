@@ -50,6 +50,7 @@ ipython_config.py
 *.joblib
 heart_disease_model.json
 model.tar.gz
+models/
 models/*.pt
 checkpoints/
 
