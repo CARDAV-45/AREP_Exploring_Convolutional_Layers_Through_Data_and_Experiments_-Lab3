@@ -1,84 +1,111 @@
-# Byte-compiled / optimized / DLL files
+# PYTHON & BYTE-COMPILED
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
+*.pyd
+*.pyo
+*.pdb
 
-# Distribution / packaging
+# PACKAGING & DISTRIBUTION
 .Python
 build/
+develop-eggs/
 dist/
+downloads/
 eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
 *.egg-info/
+.installed.cfg
 *.egg
+MANIFEST
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Virtual environments
+# VIRTUAL ENVIRONMENTS
 .venv/
 venv/
 ENV/
 env/
+pip-wheel-metadata/
 
-# Jupyter Notebook checkpoints
+# JUPYTER & IPYTHON
 .ipynb_checkpoints/
-
-# IPython history
 profile_default/
 ipython_config.py
+*.nbconvert.ipynb
+*_temp.ipynb
+*_backup.ipynb
 
-# pyenv
-.python-version
+# MODELS & CHECKPOINTS
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.pickle
+*.joblib
+heart_disease_model.json
+model.tar.gz
+models/*.pt
+checkpoints/
 
-# mypy
+# IDE & EDITORS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# TYPE CHECKING
 .mypy_cache/
-
-# pyre
+.dmypy.json
+dmypy.json
 .pyre/
 
-# VS Code settings
-.vscode/
-
-# macOS
+# OS & SYSTEM FILES
 .DS_Store
-
-# Logs
-*.log
-
-# Modelo y scripts de deployment
-heart_disease_model.json
-inference.py
-model.tar.gz
-
-
-
-# Temporary files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 *.tmp
 *.temp
+*.bak
+$RECYCLE.BIN/
 
-# Test / coverage
-htmlcov/
+# TESTING & COVERAGE
+.pytest_cache/
 .coverage
 .coverage.*
+htmlcov/
+.tox/
+.nox/
 .cache
-.pytest_cache/
+.hypothesis/
 
-# static files
-*.sqlite3
+# LOGGING & TEMP
+*.log
+logs/
+tmp/
+temp/
 
-# local env variable files
+# ENVIRONMENT & CREDENTIALS
 .env
 .env.*
+.kaggle/
+.aws/
+*.pem
+*.key
+aws_credentials_temp/
+# DATABASES & STATIC
 
-# Data files (uncomment if you want to ignore large datasets)
-# *.csv
-# data/
-
-# Notebook checkpoints and outputs
-# Sometimes it's useful to keep outputs, so these are commented out by default
-# **/.ipynb_checkpoints
-# **/*.nbconvert.ipynb
+*.sqlite3
+*.db
